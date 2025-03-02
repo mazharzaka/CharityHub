@@ -1,7 +1,9 @@
 const UserService = require('../services/user.services');
-
+const hash=require('../utils/hash');
 exports.createUser = async (req, res) => {
     try {
+        const hashedPassword = await hash.hashPassword(req.body.password);
+        req.body.password = hashedPassword;
         const user = await UserService.createUser(req.body);
         res.status(201).json(user);
     } catch (error) {
