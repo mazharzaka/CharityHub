@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const addressSchema = new mongoose.Schema({
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    country: { type: String, required: true },
+    street: { type: String },
+    city: { type: String },
+    country: { type: String },
 });
 
 const UserSchema = new mongoose.Schema({
