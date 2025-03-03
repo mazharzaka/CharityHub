@@ -1,4 +1,5 @@
 const UserService = require('../services/user.services');
+const UserRepository = require('../repositories/user.repository');
 const hash=require('../utils/hash');
 exports.createUser = async (req, res) => {
     ;
@@ -34,6 +35,28 @@ exports.getAllUsers = async (req, res) => {
         // console.log("Cloudinary Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
         const users = await UserService.getAllUsers();
         res.status(200).json(users);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+exports.blockUser = async (req, res) => {
+    try {
+        const user = await UserService.blockUser(req.params.id, req.body.status);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+exports.login = async (req, res) => {
+    try {
+         const getUserByEmail = await UserRepository.getUserByEmail(req.body.email);
+       
+        const isMatch = await hash.comparePassword(req.body.password, getUserByEmail.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: " Invalid credentials!" });
+        }
+        const user = await UserService.Login(req.body.email, req.body.password);
+        res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
