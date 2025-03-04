@@ -6,7 +6,3 @@ const secret = process.env.SECRET;
 exports.generateToken = (user) => {
     return jsonwebtoken.sign({ user }, secret, { expiresIn: '24h' });
 }
-
-exports.verifyToken = (req, res, next) => {
-    
- }

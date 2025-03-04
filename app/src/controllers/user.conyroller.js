@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: " Invalid credentials!" });
         }
-        const user = await UserService.Login(req.body.email, req.body.password);
+        const user = await UserService.Login({user_id:getUserByEmail._id,email:getUserByEmail.email,role:getUserByEmail.role});
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ message: error.message });

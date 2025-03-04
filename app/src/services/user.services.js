@@ -1,5 +1,5 @@
 const UserRepository=require('../repositories/user.repository');
-const auth = require('../utils/auth');
+const generateToken = require('../utils/generateToken');
 class UserService{
     async createUser (user){
         const userEmail = await UserRepository.getUserByEmail(user.email);
@@ -12,9 +12,11 @@ class UserService{
     async blockUser(id,status){
         return await UserRepository.blockUser(id,status);
     }
-    async Login(email,password){
-       const token= auth.generateToken(email,password);
-        return token;
+    async Login(user){
+       const token= generateToken.generateToken(user);
+    //    console.log(token);
+       
+        return {token:token};
     }
 }
 module.exports = new UserService();
