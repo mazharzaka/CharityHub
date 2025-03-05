@@ -40,8 +40,14 @@ const UserSchema = new mongoose.Schema({
     minlength:10,
     maxlength:10
     },
-    status: { type: String, enum: ["active", "inactive"], default: "active" },
-    role: { type: String, enum: ["user", "admin","guest"], default: "user" },
+    role: { 
+        type: String, 
+        enum: ["donor", "beneficiary", "volunteer", "admin"], 
+        default: "donor" 
+      },
+    status: { type: String, enum: ["pending","active", "inactive"], default: "pending" },
+    date: { type: Date, default: Date.now },
+    isVerified: { type: Boolean, default: false },
     profilePicture: { type: String, default: "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png" }
 });
 
