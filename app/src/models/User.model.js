@@ -45,6 +45,10 @@ const UserSchema = new mongoose.Schema({
         enum: ["donor", "beneficiary", "volunteer", "admin"], 
         default: "donor" 
       },
+      TransactionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Transaction',
+        default: null},
     status: { type: String, enum: ["pending","active", "inactive"], default: "pending" },
     date: { type: Date, default: Date.now },
     isVerified: { type: Boolean, default: false },

@@ -10,31 +10,34 @@ const DonationSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    currency: { 
-        type: String, 
-        enum: ['USD', 'EGP'], 
-        default: 'EGP' 
+    currency: {
+        type: String,
+        enum: ['USD', 'EGP'],
+        default: 'EGP'
     },
-    donationType: { 
-        type: String, 
-        enum: ['one-time', 'monthly'], 
-        default: 'one-time' 
+    donationType: {
+        type: String,
+        enum: ['one-time', 'monthly'],
+        default: 'one-time'
     },
-    paymentMethod: { 
-        type: String, 
-        enum: ['credit-card', 'paypal', 'cash'], 
-        default: 'cash' 
+    paymentMethod: {
+        type: String,
+        enum: ['credit-card', 'paypal', 'cash'],
+        default: 'cash'
     },
-    status: { 
-        type: String, 
-        enum: ['pending', 'completed', 'failed', 'refund'], 
-        default: 'pending' 
+    status: {
+        type: String,
+        enum: ['pending', 'completed', 'failed', 'refund'],
+        default: 'pending'
     },
     message: {
         type: String,
         trim: true
     },
- 
+    reciptUrl: {
+        type: String,
+        trim: true
+    },
     anonymous: {
         type: Boolean,
         default: false
