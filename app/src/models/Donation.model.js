@@ -27,7 +27,7 @@ const DonationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'completed', 'failed', 'refund'],
+        enum: ['pending', 'completed','cancelled'],
         default: 'pending'
     },
     message: {
@@ -41,7 +41,7 @@ const DonationSchema = new mongoose.Schema({
     anonymous: {
         type: Boolean,
         default: false
-    },
+    },    
     transactionId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Transaction',

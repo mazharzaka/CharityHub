@@ -31,6 +31,7 @@ const RequestSchema = new mongoose.Schema({
         type:String,    
         enum:['money','material','volunteer','service'],
         default:'money'} ,
+        isDeleted: { type: Boolean, default: false }, 
         currency:{
             type:String,
             enum:['USD','EGP'],

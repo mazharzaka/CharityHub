@@ -36,6 +36,7 @@ const CampaignSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Donation'
     }],
+    beneficiaries: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt : {
         type: Date,
         default: Date.now
@@ -58,6 +59,7 @@ isFeatured:{
     tags: {
         type: [String]
     },
+    isDeleted: { type: Boolean, default: false }, 
     impactReport :{
         type:String,
         default:""
