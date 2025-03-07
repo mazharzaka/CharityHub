@@ -17,3 +17,4 @@ class Transaction{
         return await Transaction.findByIdAndUpdate(id,{isDeleted:true},{new:true});
     }
 }
+module.exports = new Transaction();
