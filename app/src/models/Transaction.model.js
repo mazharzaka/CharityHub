@@ -48,6 +48,7 @@ const TransactionSchema=new mongoose.Schema({
         enum:['pending','completed','failed','refund'],
         default:'pending'
     },
+    isDeleted: { type: Boolean, default: false }, 
     failureReason :{
         type:String,
         default:null

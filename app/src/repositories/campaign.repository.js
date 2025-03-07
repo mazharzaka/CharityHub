@@ -48,3 +48,4 @@ class CampaignRepository {
    
     }
 }
+module.exports = new CampaignRepository();
