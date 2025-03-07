@@ -1,4 +1,4 @@
-const UserControllers = require('../controllers/user.conyroller');
+const UserControllers = require('../controllers/user.controller');
 const upload = require('../middlewares/multer.middle');
 const auth=require('../middlewares/auth.middle');
 const role=require('../middlewares/role.middle');
