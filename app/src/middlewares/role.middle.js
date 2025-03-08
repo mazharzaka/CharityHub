@@ -1,8 +1,22 @@
-exports.checkRole = (role) => {
+exports.checkRole = (roles, checkCreator = false, model = null) => {
     return (req, res, next) => {
-        if (!req.user ||req.user.role !== role) {
-            return res.status(403).json({ error: "You do not have the permission to access this resource" });
+        if (roles.includes(req.user.role)) {
+            next();
         }
-        next();
+        if(checkCreator){
+            if(model){
+                model.findById(req.params.id).then(data=>{
+                    if(data.creator==req.user.id){
+                        next();
+                    }
+                }).catch(err=>{
+                    res.status(500).send({message:err.message});
+                });
+            }else{
+                res.status(500).send({message:"Model not found"});
+            }
+        }else{
+            res.status(401).send({message:"Unauthorized"});
+        }
     }
 }

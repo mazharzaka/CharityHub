@@ -17,7 +17,7 @@ const CampaignSchema = new mongoose.Schema({
         type:Number,
         default:0
     },  
-    currency: { enum: ['USD', 'EGP'], default: 'EGP' },
+    currency: {type:String, enum: ['USD', 'EGP'], default: 'EGP' },
     status: { type: String, enum: ['pending', 'active', 'completed', 'failed'], default: 'pending' },
     startDate: { type: Date, default: Date.now },
     endDate: { type: Date, required: true },

@@ -55,8 +55,8 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: " Invalid credentials!" });
         }
-        const user = await UserService.Login({user_id:getUserByEmail._id,role:getUserByEmail.role});
-        res.status(200).json(user);
+        const token = await UserService.Login({user_id:getUserByEmail._id,role:getUserByEmail.role});
+        res.status(200).json(token);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
