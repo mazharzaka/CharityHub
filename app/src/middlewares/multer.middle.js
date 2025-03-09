@@ -6,7 +6,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "uploads", // اسم المجلد في Cloudinary
-    allowedFormats: ["jpeg", "png", "jpg"],
+    allowedFormats: ["jpeg", "png", "jpg",'heic','webp'],
     transformation: [{ width: 500, height: 500, crop: "limit" }]
   }
 });
