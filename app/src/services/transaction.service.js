@@ -16,5 +16,23 @@ class TransactionService{
     async deleteTransaction(id){
         return await transactionRepository.deleteTransaction(id);
     }
+    async linkTransactionToCampaign(transactionId,campaignId){
+        return await transactionRepository.linkTransactionToCampaign(transactionId,campaignId);
+    }
+  
+    async getAllTransactionsByCampaignId(campaignId){
+        return await transactionRepository.getAllTransactionsByCampaignId(campaignId);
+    }
+    async updateStatusByCampaignId(id,campaignId,status){
+        return await transactionRepository.updateStatusByCampaignId(id,campaignId,status);
+    }
+    async linhTransactionTocampaignByCampaignId(transactionId,campaignId){
+        return await transactionRepository.linhTransactionTocampaignByCampaignId(transactionId,campaignId);
+    }
+    async refundTransaction(transactionId){
+        return await transactionRepository.refundTransaction(transactionId);
+    }
+  
+
 }
 module.exports = new TransactionService();

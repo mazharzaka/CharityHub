@@ -1,4 +1,6 @@
-exports.checkRole = (roles, checkCreator = false, model = null) => {
+const model = require('../models/Campaign.model');
+
+exports.checkRole = (roles, checkCreator = false) => {
     return async (req, res, next) => {
         try {
             // console.log(req.user);
@@ -8,9 +10,7 @@ exports.checkRole = (roles, checkCreator = false, model = null) => {
             }
 
             if (checkCreator) {
-                if (!model) {
-                    return res.status(500).json({ message: "Model not found" });
-                }
+                
 
                 const data = await model.find({creator: req.user.user_id});
                 if (!data) {
