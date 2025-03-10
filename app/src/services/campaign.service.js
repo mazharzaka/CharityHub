@@ -43,6 +43,18 @@ class CampaignService {
     async JoinCampaign(campaignId) {
         return await campaignRepository.JoinCampaign(campaignId);
     }
-
+    async updateCampaignByIdAndCampaignId(campaignId, id, campaign) {
+        return await campaignRepository.updateCampaignByIdAndCampaignId(campaignId, id, campaign);
+    }
+    async deleteCampaignByIdAndCampaignId(campaignId, id) {
+        return await campaignRepository.deleteCampaignByIdAndCampaignId(campaignId, id);
+    }
+    async addVolunteersByIdAndCampaignId(campaignId, id, userId) {
+        return await campaignRepository.addVolunteersByIdAndCampaignId(campaignId, id, userId);
+    }
+    async getDonationsByCampaignId(campaignId) {
+        return await campaignRepository.getDonationsByCampaignId(campaignId);
+    }
+    
 }
 module.exports = new CampaignService();

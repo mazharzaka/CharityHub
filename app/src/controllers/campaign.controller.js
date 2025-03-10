@@ -30,16 +30,30 @@ exports.getCampaignById = async (req, res) => {
 }
 exports.updateCampaign = async (req, res) => {
     try {
+        const campaignId=req.params.campaignId;
+        if(req.user.role=="admin"){
         const campaign = await campaignService.updateCampaign(req.params.id, req.body);
-       return  res.status(200).send(campaign);
+       return  res.status(200).send(campaign);}
+        if(!campaignId){
+            return  res.status(400).send("You are not authorized to update this campaign");
+
+        }
+        const campaign = await campaignService.updateCampaignByIdAndCampaignId(campaignId, req.params.id, req.body);
+            return res.status(200).send(campaign);
     } catch (error) {
        return  res.status(400).send(error.message);
     }
 }
 exports.deleteCampaign = async (req, res) => {
-    try {
-        const campaign = await campaignService.deleteCampaign(req.params.id);
-       return  res.status(200).send(campaign);
+    try {const campaignId=req.params.campaignId;
+        if(req.user.role=="admin"){
+    const campaign = await campaignService.deleteCampaign(req.params.id);
+   return  res.status(200).send(campaign);}
+        if(!campaignId){
+            return  res.status(400).send("You are not authorized to delete this campaign");
+            }
+            const campaign = await campaignService.deleteCampaignByIdAndCampaignId(campaignId, req.params.id);
+            return res.status(200).send(campaign);
     } catch (error) {
        return  res.status(400).send(error.message);
     }
@@ -70,6 +84,12 @@ exports.statusCampaign = async (req, res) => {
 }
 exports.addVolunteers = async (req, res) => {
     try {
+        const campaignId=req.params.campaignId;
+        if(campaignId){
+            const campaign = await campaignService.addVolunteersByIdAndCampaignId(campaignId, req.params.id, req.params.userId);
+            return res.status(200).send(campaign);
+
+        }
         const campaign = await campaignService.addVolunteers(req.params.campaignId, req.params.id);
        return  res.status(200).send(campaign);
     } catch (error) {
@@ -78,9 +98,17 @@ exports.addVolunteers = async (req, res) => {
 }
 exports.leaveVolunteers = async (req, res) => {
     try {
+        const campaignById=await campaignService.getCampaignById(req.params.campaignId);
+
+    if(req.user.role=="admin"){
         const campaign = await campaignService.leaveVolunteers(req.params.campaignId, req.params.id);
+       return  res.status(200).send(campaign);}
+       if(!campaignById.volunteers.includes(req.user.user_id)){
+        return  res.status(400).send("You are not a volunteer in this campaign");
+    }
+      const campaign = await campaignService.leaveVolunteers(req.params.campaignId, req.user.user_id);
        return  res.status(200).send(campaign);
-    } catch (error) {
+}catch (error) {
        return  res.status(400).send(error.message);
     }
 }

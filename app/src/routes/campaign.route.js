@@ -9,12 +9,12 @@ router.post('/create',auth.verifyToken,role.checkRole(['admin'],true,Compaign),u
 router.get('/all', auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true,Compaign),campaignController.getAllCampaigns);
 router.get('/featured', auth.verifyToken,role.checkRole(['admin'],true,Compaign),campaignController.getFeaturedCampaigns);
 router.get('/:id',auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true,Compaign),campaignController.getCampaignById);
-router.put('/:id',auth.verifyToken,role.checkRole(['admin'],true,Compaign), campaignController.updateCampaign);
+router.put('/:id/campaignId?',auth.verifyToken,role.checkRole(['admin'],true,Compaign), campaignController.updateCampaign);
 router.delete('/:id',auth.verifyToken,role.checkRole(['admin'],true,Compaign), campaignController.deleteCampaign);
 router.put('/mark-featured/:id',auth.verifyToken,role.checkRole(['admin']),campaignController.markAsFeatured);
 router.post('/statusCampaign/:id',auth.verifyToken,role.checkRole(['admin']),campaignController.statusCampaign);
 router.post('/addVolunteer/:id/:campaignId',auth.verifyToken,role.checkRole(['admin','volunteer'],true,Compaign),campaignController.addVolunteers);
-router.post('/removeVolunteer/:id/:campaignId',auth.verifyToken,role.checkRole(['admin','volunteer'],true,Compaign),campaignController.leaveVolunteers);
+router.post('/removeVolunteer/:id/:campaignId',auth.verifyToken,role.checkRole(['admin'],true,Compaign),campaignController.leaveVolunteers);
 router.post('/:donationId/:campaignId',auth.verifyToken,role.checkRole(['admin','donor']),campaignController.addDonation);
 router.post('/addBeneficiary/:id',auth.verifyToken,role.checkRole(['admin'],true,Compaign),campaignController.addBeneficiary);
 router.post('/removeBeneficiary/:id',auth.verifyToken,role.checkRole(['admin'],true,Compaign),campaignController.removeBeneficiary);
