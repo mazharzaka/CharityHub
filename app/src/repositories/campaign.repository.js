@@ -13,8 +13,14 @@ class CampaignRepository {
     async updateCampaign(id, campaign) {
         return await Campaign.findByIdAndUpdate(id, campaign, { new: true });
     }
+    async updateCampaignByIdAndCampaignId(campaignId, id, campaign) {
+        return await Campaign.findByIdAndUpdate({_id:id,campaignId:campaignId}, campaign, { new: true });
+    }
     async deleteCampaign(id) {
         return await Campaign.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
+    }
+    async deleteCampaignByIdAndCampaignId(campaignId, id) {
+        return await Campaign.findByIdAndUpdate({_id:id,campaignId:campaignId}, { isDeleted: true }, { new: true });   
     }
     async getFeaturedCampaigns() {
         return await Campaign.find({ isFeatured: true });
@@ -27,6 +33,9 @@ class CampaignRepository {
     }
     async addVolunteers(campaignId, userId) {
         return await Campaign.findByIdAndUpdate(campaignId, { $push: { volunteers: userId } }, { new: true });
+    }
+    async addVolunteersByIdAndCampaignId(campaignId, id, userId) {
+        return await Campaign.findByIdAndUpdate({_id:id,campaignId:campaignId}, { $push: { volunteers: userId } }, { new: true });
     }
     async leaveVolunteers(campaignId, userId) {
         return await Campaign.findByIdAndUpdate(campaignId, { $pull: { volunteers: userId } }, { new: true });

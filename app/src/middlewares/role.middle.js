@@ -1,6 +1,8 @@
 exports.checkRole = (roles, checkCreator = false, model = null) => {
     return async (req, res, next) => {
         try {
+            // console.log(req.user);
+            
             if (roles.includes(req.user.role)) {
                 return next();
             }
@@ -10,12 +12,13 @@ exports.checkRole = (roles, checkCreator = false, model = null) => {
                     return res.status(500).json({ message: "Model not found" });
                 }
 
-                const data = await model.findById(req.params.id);
+                const data = await model.find({creator: req.user.user_id});
                 if (!data) {
                     return res.status(404).json({ message: "Resource not found" });
                 }
+// console.log(data);
 
-                if (data.creator.toString() === req.user.id.toString()) {
+                if (data[0].creator.toString() === req.user.user_id.toString()) {
                     return next();
                 }
             }

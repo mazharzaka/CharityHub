@@ -10,8 +10,17 @@ exports.createDonation = async (req, res) => {
 }
 exports.getAllDonations = async (req, res) => {
     try {
+        const campaignId = req.params.campaignId;
+        // console.log(campaignId);
+        
+        if(campaignId){
+            const donations = await DonationService.getDonationsBycampaignId(campaignId);
+            return res.status(200).send(donations);
+           
+        }
+        else{
         const donations = await DonationService.getAllDonations();
-        res.status(200).send(donations);
+        res.status(200).send(donations);}
     } catch (error) {
         res.status(400).send(error.message);
     }   
@@ -26,8 +35,21 @@ exports.getDonationById = async (req, res) => {
 }
 exports.updateStatus = async (req, res) => {
     try {
-        const donation = await DonationService.updateStatus(req.params.id, req.body.status);
-        res.status(200).send(donation);
+        const campaignId = req.params.campaignId;
+        if(campaignId){
+            const donation = await DonationService.updateStatusBycampaignId(req.params.id, req.body.status,campaignId);
+            if(!donation){
+                return res.status(404).send("Donation not found");
+            }
+            res.status(200).send(donation);
+        }
+        else if(req.user.role === "admin"){
+            const donation = await DonationService.updateStatus(req.params.id, req.body.status);
+            res.status(200).send(donation);
+        }else{
+            res.status(403).send("You are not allowed to do this action");
+        }
+    
     } catch (error) {
         res.status(400).send(error.message);
     }

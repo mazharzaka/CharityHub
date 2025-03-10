@@ -4,7 +4,8 @@ const campaignService = require('../services/campaign.service');
 exports.createCampaign = async (req, res) => {
     try {
         req.body.image = req.file.path;
-        req.body.creator = req.user.user_id;
+    
+        // req.body.creator = req.user.user_id;
         const campaign = await campaignService.createCampaign(req.body);
         return   res.status(201).send(campaign);
     } catch (error) {
@@ -20,9 +21,7 @@ exports.getAllCampaigns = async (req, res) => {
     }
 }
 exports.getCampaignById = async (req, res) => {
-    try {
-        console.log(req.params.id);
-        
+    try {        
         const campaign = await campaignService.getCampaignById(req.params.id);
        return  res.status(200).send(campaign);
     } catch (error) {
@@ -71,7 +70,7 @@ exports.statusCampaign = async (req, res) => {
 }
 exports.addVolunteers = async (req, res) => {
     try {
-        const campaign = await campaignService.addVolunteers(req.params.campaignId, req.params.userId);
+        const campaign = await campaignService.addVolunteers(req.params.campaignId, req.params.id);
        return  res.status(200).send(campaign);
     } catch (error) {
        return  res.status(400).send(error.message);
@@ -79,7 +78,7 @@ exports.addVolunteers = async (req, res) => {
 }
 exports.leaveVolunteers = async (req, res) => {
     try {
-        const campaign = await campaignService.leaveVolunteers(req.params.campaignId, req.params.userId);
+        const campaign = await campaignService.leaveVolunteers(req.params.campaignId, req.params.id);
        return  res.status(200).send(campaign);
     } catch (error) {
        return  res.status(400).send(error.message);
