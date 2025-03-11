@@ -7,8 +7,8 @@ class transactionRepository{
     async getAllTransactions(){
         return await Transaction.find();
     }
-    async getAllTransactionsByCampaignId(campaignId){
-        return await Transaction.find({campaign:campaignId});
+    async getAllTransactionsByUserId(userId){
+        return await Transaction.find({userId:userId});
     }
     async getTransactionById(id){
         return await Transaction.findById(id);
@@ -16,18 +16,18 @@ class transactionRepository{
     async updateStatus(id,status){ 
         return await Transaction.findByIdAndUpdate(id,{status:status},{new:true});
     }
-    async updateStatusByCampaignId(id,campaignId,status){
-        return await Transaction.findOneAndUpdat({_id:id,campaign:campaignId},{status:status},{new:true})
+    async updateStatusByUserId(id,UserId,status){
+        return await Transaction.findOneAndUpdat({_id:id,campaign:UserId},{status:status},{new:true})
     }
     async deleteTransaction(id){
         return await Transaction.findByIdAndUpdate(id,{isDeleted:true},{new:true});
     }
 
-    async linkTransactionToCampaign(transactionId,campaignId){
-        return await Transaction.findByIdAndUpdate(transactionId,{campaign:campaignId},{new:true});
+    async linkTransactionToCampaign(transactionId,UserId){
+        return await Transaction.findByIdAndUpdate(transactionId,{campaign:UserId},{new:true});
     }
-    async linhTransactionTocampaignByCampaignId(transactionId,campaignId){
-        return await Transaction.findByIdAndUpdate({_id:transactionId,campaign:campaignId},{campaign:campaignId},{new:true});   
+    async linhTransactionTocampaignByUserId(transactionId,UserId){
+        return await Transaction.findByIdAndUpdate({_id:transactionId,campaign:UserId},{campaign:UserId},{new:true});   
     }
     async refundTransaction(transactionId){
         return await Transaction.findByIdAndUpdate(transactionId,{status:'refund'},{new:true});

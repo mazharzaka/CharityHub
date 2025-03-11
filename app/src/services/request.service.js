@@ -2,7 +2,7 @@ const RequestRepository = require('../repositories/request.repository');
 
 class RequestService {
     async createRequest(request) {
-        return await RequestRepository.createRequest(request);
+        return await RequestRepository.create(request);
     }
     async getAllRequests() {
         return await RequestRepository.getAllRequests();
@@ -17,4 +17,4 @@ class RequestService {
         return await RequestRepository.deleteRequest(id);
     }
 }
-exports.RequestService = new RequestService();
+module.exports = new RequestService();

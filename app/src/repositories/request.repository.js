@@ -1,7 +1,7 @@
 const Request = require('../models/request.model');
 
 class RequestRepository {
-    async createRequest(request) {
+    async create(request) {
         return await Request.create(request);
     }
     async getAllRequests() {
@@ -18,4 +18,4 @@ class RequestRepository {
         return await Request.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
     }
 }
-exports.RequestRepository = new RequestRepository();
+module.exports = new RequestRepository();

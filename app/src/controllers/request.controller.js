@@ -26,7 +26,7 @@ exports.getRequestById = async (req, res) => {
 }
 exports.updateStatus = async (req, res) => {
     try {
-        const request = await requestService.updateStatus(req.params.id, req.body.status);
+        const request = await requestService.statusRequest(req.params.id, req.body.status);
         res.status(200).send(request);
     } catch (error) {
         res.status(400).send(error.message);

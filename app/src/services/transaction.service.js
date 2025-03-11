@@ -16,18 +16,18 @@ class TransactionService{
     async deleteTransaction(id){
         return await transactionRepository.deleteTransaction(id);
     }
-    async linkTransactionToCampaign(transactionId,campaignId){
-        return await transactionRepository.linkTransactionToCampaign(transactionId,campaignId);
+    async linkTransactionToCampaign(transactionId,UserId){
+        return await transactionRepository.linkTransactionToCampaign(transactionId,UserId);
     }
   
-    async getAllTransactionsByCampaignId(campaignId){
-        return await transactionRepository.getAllTransactionsByCampaignId(campaignId);
+    async getAllTransactionsByUserId(userId){
+        return await transactionRepository.getAllTransactionsByUserId(userId);
     }
-    async updateStatusByCampaignId(id,campaignId,status){
-        return await transactionRepository.updateStatusByCampaignId(id,campaignId,status);
+    async updateStatusByUserId(id,UserId,status){
+        return await transactionRepository.updateStatusByUserId(id,UserId,status);
     }
-    async linhTransactionTocampaignByCampaignId(transactionId,campaignId){
-        return await transactionRepository.linhTransactionTocampaignByCampaignId(transactionId,campaignId);
+    async linhTransactionTocampaignByUserId(transactionId,UserId){
+        return await transactionRepository.linhTransactionTocampaignByUserId(transactionId,UserId);
     }
     async refundTransaction(transactionId){
         return await transactionRepository.refundTransaction(transactionId);

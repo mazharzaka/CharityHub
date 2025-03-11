@@ -10,17 +10,19 @@ exports.createTransaction = async (req, res) => {
 }
 exports.getAllTransactions = async (req, res) => {
     try {
+        console.log(req.user.user_id,req.params.id);
         if(req.user.role==="admin"){
             const transactions = await transactionService.getAllTransactions();
-            res.status(200).send(transactions);
+            return res.status(200).send(transactions);
         }   
+        
         if(req.user.user_id.toString()!==req.params.id.toString()){
            return res.status(400).send("You are not authorized to view this transactions");
         } 
-        const transactions = await transactionService.getAllTransactionsByCampaignId(req.params.id);
-        res.status(200).send(transactions);
+        const transactions = await transactionService.getAllTransactionsByUserId(req.params.id);
+       return res.status(200).send(transactions);
     } catch (error) {
-        res.status(400).send(error.message);
+      return  res.status(400).send(error.message);
     }
 }
 exports.getTransactionById = async (req, res) => {
@@ -33,14 +35,14 @@ exports.getTransactionById = async (req, res) => {
 }
 exports.updateStatus = async (req, res) => {
     try {
-        const campaignId = req.params.campaignId;
+        const userId = req.params.userid;
         if(req.user.role==="admin"){
         const transaction = await transactionService.updateStatus(req.params.id, req.body.status);
         res.status(200).send(transaction);
     }
-    if(!campaignId){
+    if(!userId){
         return res.status(400).send("Campaign Id is required");}
-        const transaction = await transactionService.updateStatusByCampaignId(req.params.id, campaignId, req.body.status);
+        const transaction = await transactionService.updateStatusByUserId(req.params.id, userId, req.body.status);
         res.status(200).send(transaction);
    
 
