@@ -37,7 +37,7 @@ function Header() {
         </div>
       </div>
     </div>
-    <div className={`w-full ${isScrolled&&"fixed z-50"} h-24 transition-all duration-300 bg-white shadow-xl shadow-[rgba(25,25,25,0.1)]`} >
+    <div className={`w-full ${isScrolled&&"fixed !z-50"} h-24 transition-all duration-300 bg-white shadow-xl shadow-[rgba(25,25,25,0.1)]`} >
       <div className='flex items-center  h-full w-full justify-between !py-2 !px-8'>
         <Logo />
       <div className="flex">
