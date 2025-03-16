@@ -2,9 +2,9 @@
 
 import Itext from "@/types/TextHome"
 
-function Headline({text}:Itext) {
+function Headline({text,size="text-2xl"}:Itext) {
   return (
-    <div className="text-2xl font-bold text-[#09cc7f] !mb-12">
+    <div className={`${size} font-bold text-[#09cc7f] !mb-6`}>
         {text}
 </div>
   )
