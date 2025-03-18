@@ -31,7 +31,11 @@ function Carousalcard() {
           <Link content="Goal:" className={false} />
           <span> <TextHome text="1000$" hover={true} size="text-sx" /> </span>
         </div>
+       
       </div>
+      <div className="flex items-center justify-center">
+          <Link content="View" path="/campaign/52" className={false} />
+        </div>
     </div></>
   )
 }

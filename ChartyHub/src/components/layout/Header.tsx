@@ -32,7 +32,7 @@ function Header() {
         </div>
         <div className="flex">
           <Link content="Register" className={true} />
-          <Link content="Login" className={false} />
+          <Link content="Login" path="/login" className={false} />
 
         </div>
       </div>

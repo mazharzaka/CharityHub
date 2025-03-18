@@ -1,5 +1,6 @@
 interface Ilink{
     content:string,
-    className:boolean
+    className:boolean,
+    path?:string
 }
 export default Ilink
