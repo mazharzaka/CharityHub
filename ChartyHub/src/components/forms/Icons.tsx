@@ -5,7 +5,7 @@ import Iicons from "@/types/Icon"
 
 function Icons({component}:Iicons) {
   return (
-    <div className="flex">
+    <div className="flex justify-center items-center">
 {
     (Array.isArray(component))&&component?.map((e:any)=>{
         return e}

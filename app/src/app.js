@@ -15,7 +15,7 @@ const limiter = rateLimit({
     message: "Too many requests from this IP, please try again after an hour"
   });
   app.use(limiter);
-app.use(cors("localhost:3000"));
+app.use(cors("localhost:5173"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/user',userRoute);

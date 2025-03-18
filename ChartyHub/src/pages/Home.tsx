@@ -1,12 +1,11 @@
 import Main from '@/components/layout/Main'
-import Header from '../components/layout/Header'
-import About from './About'
-import FeaturedCampaigns from './FeaturedCampaigns'
-import Volunteer from './Volunteer'
+// import Header from '../components/layout/Header'
+import About from '../components/layout/About'
+import FeaturedCampaigns from '../components/layout/FeaturedCampaigns'
+import Volunteer from '../components/layout/Volunteer'
 
 function Home() {
   return (<>
-   <Header />
    <Main/>
    <About/>
    <FeaturedCampaigns/>
