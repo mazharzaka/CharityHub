@@ -12,7 +12,7 @@ const navLinks:Inavs[] = [
     // { name: "Blog / News", path: "/blog" },
     
     // { name: "Dashboard", path: "/dashboard" },
-    // { name: "Profile Settings", path: "/profile" },
+    { name: "Profile Settings", path: "/Myporfile" },
     { name: "Logout", path: "/logout" }
   ];
   
