@@ -1,6 +1,7 @@
 interface Ilink{
     content:string,
     className:boolean,
-    path?:string
+    path?:string,
+    onClick?: () => void;
 }
 export default Ilink

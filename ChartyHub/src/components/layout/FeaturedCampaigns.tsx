@@ -5,7 +5,9 @@ import Headline from "@/components/cards/Headline"
 import TextHome from "@/components/cards/TextHome"
 
 
+
 function FeaturedCampaigns() {
+
   return (
     <div className="relative  bg-cover bg-center " style={{ backgroundImage: "url('/section_bg03.png')" }} >
 

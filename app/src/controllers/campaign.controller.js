@@ -30,9 +30,12 @@ exports.getCampaignById = async (req, res) => {
 }
 exports.updateCampaign = async (req, res) => {
     try {
-        const campaignId=req.params.campaignId;
+        const campaignId=req.params.id;
+        req.body.image = req.file?.path;
+        
         if(req.user.role=="admin"){
-        const campaign = await campaignService.updateCampaign(req.params.id, req.body);
+            const campaign = await campaignService.updateCampaign(req.params.id, req.body);
+            console.log( req.body);
        return  res.status(200).send(campaign);}
         if(!campaignId){
             return  res.status(400).send("You are not authorized to update this campaign");

@@ -13,7 +13,7 @@ const navLinks:Inavs[] = [
     
     // { name: "Dashboard", path: "/dashboard" },
     { name: "Profile Settings", path: "/Myporfile" },
-    { name: "Logout", path: "/logout" }
+    { name: "Logout", path: "/login" }
   ];
   
   export default navLinks;

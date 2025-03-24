@@ -7,18 +7,29 @@ import Donation from "@/pages/Donation"
 import Home from "@/pages/Home"
 import Login from "@/pages/Login"
 import Profille from "@/pages/Profille"
-import { Route, Routes } from "react-router"
+import { Outlet, Route, Routes } from "react-router"
+import ProtectedRoute from "./protect"
+import Request from "@/pages/Request"
+import MyRequests from "@/components/cards/MyRequestCard"
 
 function AppRoute() {
   return (
     <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/campaigns" element={<AllCampaings/>}/>
-        <Route path="/Myporfile" element={<Profille/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/campaign/:id" element={<CampaignByid/>}/>
-        <Route path="/donation/:id" element={<Donation/>}/>
+      <Route path="/login" element={<Login />} />
+      <Route element={<ProtectedRoute requiredRole={["donor", "beneficiary", "volunteer", "admin"]}>
+        <Outlet />
+      </ProtectedRoute>}>
+        <Route path="/" element={<Home />} />
+        <Route path="/campaigns" element={<AllCampaings />} />
+        <Route path="/Myporfile" element={<Profille />} />
+        <Route path="/campaign/:id" element={<CampaignByid />} />
+      </Route>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/requests" element={<Request />} />
+      <Route path="/requests/:id" element={<MyRequests />} />
+      <Route path="/donation/:id" element={<Donation />
+
+      } />
     </Routes>
   )
 }

@@ -9,16 +9,20 @@ import Link from "../forms/Link";
 import Icons from "../forms/Icons";
 import { Facebook, Github, MailPlus } from "lucide-react";
 import useLogin from "@/services/authService";
+import Store from "@/lib/store/Auth";
 
 function Formlogin() {
     const { control, handleSubmit, formState: { errors } } = useCustomForm<LoginFormValues>(loginSchema);
     const Login=useLogin()
+    const {loginStore}=Store()
     const onSubmit = (data: LoginFormValues) => {
         Login.mutate(data,{
             onSuccess:(res)=>{
-                localStorage.setItem("token",res.token)
-                console.log("login successfuly");
+                console.log(data);
                 
+                localStorage.setItem("token",res.token)
+                loginStore(res.token)
+                console.log("login successfuly");
             },
             onError:(err)=>{
                 console.log(err);

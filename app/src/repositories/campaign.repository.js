@@ -11,7 +11,10 @@ class CampaignRepository {
         return await Campaign.findById(id);
     }
     async updateCampaign(id, campaign) {
-        return await Campaign.findByIdAndUpdate(id, campaign, { new: true });
+       return await Campaign.findByIdAndUpdate(id, campaign, { new: true });
+
+    
+         
     }
     async updateCampaignByIdAndCampaignId(campaignId, id, campaign) {
         return await Campaign.findByIdAndUpdate({_id:id,campaignId:campaignId}, campaign, { new: true });

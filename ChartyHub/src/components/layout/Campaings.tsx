@@ -4,7 +4,7 @@ import TextHome from "../cards/TextHome"
 function Campaings() {
     return (<>
         <div className="relative  bg-cover bg-center h-96 flex justify-center items-center" style={{ backgroundImage: "url('/hero2.png')" }} >
-            <TextHome text="All Campains" size="text-5xl" />
+            <TextHome text="All Campaigns" size="text-5xl" />
 
         </div>
         <div className="!z-10 !p-8 w-full !mt-10 ">

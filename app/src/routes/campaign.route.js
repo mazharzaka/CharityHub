@@ -9,7 +9,7 @@ router.post('/create',auth.verifyToken,role.checkRole(['admin'],true),setImageTy
 router.get('/all', auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true),campaignController.getAllCampaigns);
 router.get('/featured', auth.verifyToken,role.checkRole(['admin'],true),campaignController.getFeaturedCampaigns);
 router.get('/:id',auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true),campaignController.getCampaignById);
-router.put('/:id/campaignId?',auth.verifyToken,role.checkRole(['admin'],true), campaignController.updateCampaign);
+router.put('/:id',auth.verifyToken,role.checkRole(['admin'],true),setImageType("campaign"),upload.single('image'), campaignController.updateCampaign);
 router.delete('/:id',auth.verifyToken,role.checkRole(['admin'],true), campaignController.deleteCampaign);
 router.put('/mark-featured/:id',auth.verifyToken,role.checkRole(['admin']),campaignController.markAsFeatured);
 router.post('/statusCampaign/:id',auth.verifyToken,role.checkRole(['admin']),campaignController.statusCampaign);
