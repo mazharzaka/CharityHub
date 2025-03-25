@@ -10,6 +10,7 @@ import { Label } from "../ui/label"
 import { Textarea } from "../ui/textarea"
 import { useState } from "react"
 import LocationPicker from "../cards/Map"
+import Headline from "../cards/Headline"
 
 function RequestForm() {
     const [location, setLocation] = useState<ILocation>({
@@ -18,7 +19,11 @@ function RequestForm() {
         address: "",
     });
     return (
-        <div className="flex justify-center">
+        <div className="flex items-center flex-col">
+             <div className="flex w-full  !p-8 space-y-6 items-center flex-col">
+                    <Headline text="Make a Request" size="text-3xl" />
+                    <p className="text-gray-600 text-center">Your Request makes a difference!</p>
+                </div>
             <div className="max-w-4xl w-full  !p-8 space-y-6 ">
                 <div className=" w-full !p-6 space-y-6">
                     <Card>

@@ -8,7 +8,7 @@ class CampaignRepository {
         return await Campaign.find();
     }
     async getCampaignById(id) {
-        return await Campaign.findById(id);
+        return await Campaign.findById(id).populate('creator');
     }
     async updateCampaign(id, campaign) {
        return await Campaign.findByIdAndUpdate(id, campaign, { new: true });

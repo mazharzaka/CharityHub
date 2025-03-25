@@ -22,6 +22,8 @@ class DonationService {
     async getDonationsBycampaignIdAndId(campaignId, id) {
         return await DonationRepository.getDonationsBycampaignIdAndId(campaignId, id);
     }
-    
+    async addTransaction(donationId, transactionId) {
+        return await DonationRepository.addTransaction(donationId, transactionId);
+    }
 }
 module.exports = new DonationService();

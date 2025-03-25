@@ -1,8 +1,18 @@
 const DonationService = require('../services/donation.service');
+const CampaignService = require('../services/campaign.service');
+const TransactionService = require('../services/transaction.service');
 
 exports.createDonation = async (req, res) => {
     try {
         const donation = await DonationService.createDonation(req.body);
+       await CampaignService.addDonation(req.body.campaignId,donation._id);
+       const campaign = await CampaignService.getCampaignById(req.body.campaignId);
+      campaign.currentAmount += req.body.amount;
+      await CampaignService.updateCampaign(req.body.campaignId,campaign);
+    //   console.log(req.user);
+      
+      const transaction=await TransactionService.createTransaction({donationId:donation._id,transactionReference: `TXN-${Date.now()}`,amount:req.body.amount,userId:req.user.user_id});
+      await DonationService.addTransaction(donation._id,transaction._id);
         res.status(201).send(donation);
     } catch (error) {
         res.status(400).send(error.message);

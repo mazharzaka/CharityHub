@@ -6,7 +6,7 @@ import { Progress } from "@radix-ui/react-progress"
 // import TextHome from "../cards/TextHome"
 function Campaincarousal() {
   const [progress, setProgress] = useState(13)
-  const {campaignsFeatured,getAll,error,loading}=useCampaignsFeatured()
+  const {campaignsFeatured,getAll,loading}=useCampaignsFeatured()
   useEffect(()=>{
     getAll()
     console.log("campaignsFeatured:", campaignsFeatured);
