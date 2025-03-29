@@ -23,7 +23,7 @@ const useOneCampaings = create<oneCampaignState>((set) => ({
 
     try {
       const res = await getCampaignById(id);
-      console.log(res.data);
+      // console.log(res.data);
       
       set({ oneCampaign: res.data, loading: false });
     } catch (err: any) {

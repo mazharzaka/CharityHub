@@ -1,4 +1,5 @@
 // import AllCampaings from "@/pages/AllCampaings";
+import Donation from "@/types/Donation";
 import axios from "axios";
 // import { config } from "process";
 
@@ -18,5 +19,5 @@ API.interceptors.request.use((config)=>{
 export const allCampaings=()=>API.get('/campaign/all')
 export const allCampaingsFeature=()=>API.get('/campaign/featured')
 export const getCampaignById=(id:string)=>API.get(`/campaign/${id}`)
-
+export const createDonation=(data:Donation)=>API.post('/donation',data)
 export default API

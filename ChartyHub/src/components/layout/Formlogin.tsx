@@ -10,11 +10,13 @@ import Icons from "../forms/Icons";
 import { Facebook, Github, MailPlus } from "lucide-react";
 import useLogin from "@/services/authService";
 import Store from "@/lib/store/Auth";
+import { useNavigate } from "react-router";
 
 function Formlogin() {
     const { control, handleSubmit, formState: { errors } } = useCustomForm<LoginFormValues>(loginSchema);
     const Login=useLogin()
     const {loginStore}=Store()
+    const navigate=useNavigate()
     const onSubmit = (data: LoginFormValues) => {
         Login.mutate(data,{
             onSuccess:(res)=>{
@@ -23,6 +25,7 @@ function Formlogin() {
                 localStorage.setItem("token",res.token)
                 loginStore(res.token)
                 console.log("login successfuly");
+                navigate("/")
             },
             onError:(err)=>{
                 console.log(err);

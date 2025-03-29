@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import { useState } from "react";
+import {  useState } from "react";
 import Headline from "../cards/Headline"
 import TextHome from "../cards/TextHome"
 import { Card, CardContent } from "../ui/card"
@@ -8,11 +8,37 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import Droplist from "../forms/Droplist";
 import { Banknote, CreditCard, Receipt } from "lucide-react";
+import { useParams } from "react-router";
+import { Textarea } from "../ui/textarea";
+import useDonationStore from "@/lib/store/Donation.store";
+import Donation from "@/types/Donation";
 
 function DonationForm() {
     const [amount, setAmount] = useState<number>(50);
     const [anonymous, setAnonymous] = useState<boolean>(true);
     const [paymentMethod, setPaymentMethod] = useState<string>("cash");
+    const [message, setmessage] = useState<string>("");
+    const { id } = useParams<{ id: string }>();
+    const [donationType, setDonationType] = useState<string>("one-time");
+    const [currency, setCurrency] = useState<string>("USD");
+    const {addDonation}=useDonationStore()
+    const Submit=() => {
+       
+        const donationData = {
+            donorId: "67c8a2d47c462697db6cc765",  
+            campaignId:id,  
+            amount: amount,  
+            currency:currency,  
+            donationType: donationType,  
+            paymentMethod: paymentMethod,  
+            message: message,  
+            anonymous: false
+          //   "transactionId": "65f456def789abc123456ghi"  
+          }
+          console.log(donationData.amount);
+          
+        addDonation(donationData as Donation);
+    }
     return (
         <div className="flex justify-center">
             <div className="max-w-4xl w-full  !p-8 space-y-6 ">
@@ -34,9 +60,10 @@ function DonationForm() {
                                         ${value}
                                     </Button>))}
                             </div>
+                            <Textarea placeholder="Write a message"  onChange={(e) => setmessage(e.target.value)}/>
                             <Input value={amount}  onChange={(e) => setAmount(Number(e.target.value))} />
-                            <Droplist donationType={['one-time', 'monthly']} />
-                            <Droplist donationType={['USD', 'EGP']} />
+                            <Droplist value={donationType}  onChange={(value:string) => setDonationType(value)}    donationType={['one-time', 'monthly']} />
+                            <Droplist value={currency}  onChange={(value:string) => setCurrency(value)}  donationType={['USD', 'EGP']} />
                         </CardContent>
                     </Card>
                 </div>
@@ -61,7 +88,7 @@ function DonationForm() {
                             </label>
                         </CardContent>
                     </Card>
-                    <Button className="w-full text-2xl text-white !mt-4 !py-8 bg-[#09cc7f] hover:bg-[#24ac75]">Donate Now</Button>
+                    <Button onClick={Submit} className="w-full text-2xl text-white !mt-4 !py-8 bg-[#09cc7f] hover:bg-[#24ac75]">Donate Now</Button>
                 </div>
 
             </div>
