@@ -42,8 +42,8 @@ const Logout=()=>{
           <Icons component={[<Facebook className="!ml-4 transition-all duration-300 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={24} />, <Github className="!ml-4 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={24} />, <MailPlus className="!ml-4 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={24} />, <Linkedin className="!ml-4 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={24} />]} />
         </div>
         <div className="flex">
-          <Link content="logout" path="/login"  onClick={()=> Logout()} className={true} />
-          <Link content="Login" path="/login" className={false} />
+          <Link content="signup" path="/signup" className={true} />
+          <Link content="logout" path="/login"  onClick={()=> Logout()} className={false} />
 
         </div>
       </div>

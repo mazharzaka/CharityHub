@@ -8,7 +8,13 @@ class transactionRepository{
         return await Transaction.find();
     }
     async getAllTransactionsByUserId(userId){
-        return await Transaction.find({userId:userId});
+        return await Transaction.find({userId:userId}).populate('donationId') .populate({
+            path: 'donationId',
+            populate: {
+                path: 'campaignId', 
+                // select: 'title description' 
+            }
+        });
     }
     async getTransactionById(id){
         return await Transaction.findById(id);

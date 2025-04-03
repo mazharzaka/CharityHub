@@ -20,4 +20,7 @@ export const allCampaings=()=>API.get('/campaign/all')
 export const allCampaingsFeature=()=>API.get('/campaign/featured')
 export const getCampaignById=(id:string)=>API.get(`/campaign/${id}`)
 export const createDonation=(data:Donation)=>API.post('/donation',data)
+export const getAllDonation=()=>API.get('/donation')
+export const getAllDonationsByCampaignId=(id:string)=>API.get(`/donation/${id}`)
+export const getAllTransactionByUser=()=>API.get(`/transaction/all`)
 export default API

@@ -16,10 +16,10 @@ exports.getAllTransactions = async (req, res) => {
             return res.status(200).send(transactions);
         }   
         
-        if(req.user.user_id.toString()!==req.params.id.toString()){
-           return res.status(400).send("You are not authorized to view this transactions");
-        } 
-        const transactions = await transactionService.getAllTransactionsByUserId(req.params.id);
+        // if(req.user.user_id.toString()!==req.params.id.toString()){
+        //    return res.status(400).send("You are not authorized to view this transactions");
+        // } 
+        const transactions = await transactionService.getAllTransactionsByUserId(req.user.user_id);
        return res.status(200).send(transactions);
     } catch (error) {
       return  res.status(400).send(error.message);

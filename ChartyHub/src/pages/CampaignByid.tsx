@@ -9,11 +9,13 @@ import { Link, useParams } from "react-router";
 import useOneCampaings from "@/lib/store/OneCampaign";
 import { useEffect } from "react";
 import { Badge, Calendar, Mail, MapPin, Phone, Users } from "lucide-react";
+import { HistoryTable } from "@/components/cards/Historytable";
 function CampaignByid() {
   const { id } = useParams<{ id: string }>()
-  const { oneCampaign, loading, getOneCampaings } = useOneCampaings();
+  const { oneCampaign, loading, getOneCampaings,getAllDonation,allDonation } = useOneCampaings();
   useEffect(() => {
     getOneCampaings(id)
+    getAllDonation(id)
   }
     , [id])
   const startDate = oneCampaign.startDate ? new Date(oneCampaign.startDate) : null;
@@ -60,9 +62,7 @@ function CampaignByid() {
               </Link>
             </CardContent>
           </Card>
-
-          {/* Campaign Details */}
-          <Card className=" !mb-5 ">
+     <Card className=" !mb-5 ">
             <CardContent className="!p-6  !space-y-4">
               <TextHome text="About the Campaign" size="text-2xl" />
               <div className="flex items-center gap-2 mt-3">
@@ -85,6 +85,13 @@ function CampaignByid() {
               </div>
             </CardContent>
           </Card>
+          <Card className=" !mb-5 ">
+            <CardContent className="!p-6  !space-y-4">
+              <TextHome text="History Of Donation" size="text-2xl" />
+            <HistoryTable AllDonations={allDonation} Row={["Donor Name", "Status", "paymentStatus", "donationType", "Date", "Amount"]} />
+            </CardContent>
+          </Card>
+
 
 
           <Card className=" !mb-5 ">

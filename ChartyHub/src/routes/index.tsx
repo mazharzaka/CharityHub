@@ -11,6 +11,7 @@ import { Outlet, Route, Routes } from "react-router"
 import ProtectedRoute from "./protect"
 import Request from "@/pages/Request"
 import MyRequests from "@/components/cards/MyRequestCard"
+import MyTransaction from "@/pages/MyTransaction"
 
 function AppRoute() {
   return (
@@ -26,6 +27,7 @@ function AppRoute() {
       </Route>
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/requests" element={<Request />} />
+      <Route path="/MyTransaction" element={<MyTransaction />} />
       <Route path="/requests/:id" element={<MyRequests />} />
       <Route path="/donation/:id" element={<Donation />
 

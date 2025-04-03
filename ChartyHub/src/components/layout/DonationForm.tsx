@@ -35,9 +35,9 @@ function DonationForm() {
             anonymous: false
           //   "transactionId": "65f456def789abc123456ghi"  
           }
-          console.log(donationData.amount);
+          console.log(donationData);
           
-        addDonation(donationData as Donation);
+        addDonation(donationData as unknown as Donation);
     }
     return (
         <div className="flex justify-center">
@@ -62,11 +62,14 @@ function DonationForm() {
                             </div>
                             <Textarea placeholder="Write a message"  onChange={(e) => setmessage(e.target.value)}/>
                             <Input value={amount}  onChange={(e) => setAmount(Number(e.target.value))} />
-                            <Droplist value={donationType}  onChange={(value:string) => setDonationType(value)}    donationType={['one-time', 'monthly']} />
-                            <Droplist value={currency}  onChange={(value:string) => setCurrency(value)}  donationType={['USD', 'EGP']} />
+                            {/* <Droplist value={donationType}  onChange={(value:string) => console.log(value)
+                            }    donationType={['one-time', 'monthly']} /> */}
+                          <Droplist value={currency} onChange={setCurrency} options={['USD', 'EGP']} />
+                            <Droplist value={donationType} onChange={setDonationType} options={['one-time', 'monthly']} />
                         </CardContent>
                     </Card>
                 </div>
+                
                 <div className="max-w-4xl w-full !p-6 space-y-6">
                     <Card className="w-full">
                         <CardContent className="!p-8 !space-y-4">

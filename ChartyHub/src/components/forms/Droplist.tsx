@@ -1,16 +1,41 @@
-import DonationTypeSelectorProps from "@/types/DonationTypeSelectorProps";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Droplist({  donationType }: DonationTypeSelectorProps) {
-    const [selected, setSelected] = useState<string>(donationType[0]);
-    return (
-        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="w-full !p-2 border rounded-md">
-            {donationType?.map((e: string) => {
-                return <option value={e}>{e}</option>
-            })}
-        </select>
-    );
-
+interface DroplistProps {
+    options: string[];
+    value?: string;
+    onChange?: (value: string) => void;
 }
 
-export default Droplist
+function Droplist({ options, value, onChange }: DroplistProps) {
+    const [selected, setSelected] = useState<string>(value || options[0]);
+
+    useEffect(() => {
+        if (value !== undefined) {
+            setSelected(value);
+        }
+    }, [value]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newValue = e.target.value;
+        setSelected(newValue);
+        if (onChange) {
+            onChange(newValue);
+        }
+    };
+
+    return (
+        <select 
+            value={selected} 
+            onChange={handleChange} 
+            className="w-full !p-2 border rounded-md"
+        >
+            {options.map((option) => (
+                <option key={option} value={option}>
+                    {option}
+                </option>
+            ))}
+        </select>
+    );
+}
+
+export default Droplist;

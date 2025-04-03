@@ -17,7 +17,7 @@ class DonationRepository {
         return await donations.findOneAndUpdate({ campaignId: campaignId, _id: id }, { status: status }, { new: true });    
     } 
     async getDonationsBycampaignId(campaignId) {
-        return await donations.find({ campaignId: campaignId });
+        return await donations.find({ campaignId: campaignId }).populate('donorId');
     }
     async getDonationsBycampaignIdAndId(campaignId, id) {
         return await donations.find({ campaignId: campaignId, _id: id });
