@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import {  useState } from "react";
+import { useState } from "react";
 import Headline from "../cards/Headline"
 import TextHome from "../cards/TextHome"
 import { Card, CardContent } from "../ui/card"
@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import { Textarea } from "../ui/textarea";
 import useDonationStore from "@/lib/store/Donation.store";
 import Donation from "@/types/Donation";
+import { jwtDecode } from "jwt-decode";
 
 function DonationForm() {
     const [amount, setAmount] = useState<number>(50);
@@ -21,22 +22,32 @@ function DonationForm() {
     const { id } = useParams<{ id: string }>();
     const [donationType, setDonationType] = useState<string>("one-time");
     const [currency, setCurrency] = useState<string>("USD");
-    const {addDonation}=useDonationStore()
-    const Submit=() => {
+    const { addDonation } = useDonationStore()
+    const Submit = () => {
+        const token = localStorage.getItem("token")
+        //    console.log(token);
+        interface DecodedToken {
+            user: {
+                user_id: string;
+            };
+        }
+
+        const decode = jwtDecode<DecodedToken>(token as string);
        
+
         const donationData = {
-            donorId: "67c8a2d47c462697db6cc765",  
-            campaignId:id,  
-            amount: amount,  
-            currency:currency,  
-            donationType: donationType,  
-            paymentMethod: paymentMethod,  
-            message: message,  
+            donorId:decode.user.user_id,
+            campaignId: id,
+            amount: amount,
+            currency: currency,
+            donationType: donationType,
+            paymentMethod: paymentMethod,
+            message: message,
             anonymous: false
-          //   "transactionId": "65f456def789abc123456ghi"  
-          }
-          console.log(donationData);
-          
+            //   "transactionId": "65f456def789abc123456ghi"  
+        }
+        console.log(donationData);
+
         addDonation(donationData as unknown as Donation);
     }
     return (
@@ -60,23 +71,23 @@ function DonationForm() {
                                         ${value}
                                     </Button>))}
                             </div>
-                            <Textarea placeholder="Write a message"  onChange={(e) => setmessage(e.target.value)}/>
-                            <Input value={amount}  onChange={(e) => setAmount(Number(e.target.value))} />
+                            <Textarea placeholder="Write a message" onChange={(e) => setmessage(e.target.value)} />
+                            <Input value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
                             {/* <Droplist value={donationType}  onChange={(value:string) => console.log(value)
                             }    donationType={['one-time', 'monthly']} /> */}
-                          <Droplist value={currency} onChange={setCurrency} options={['USD', 'EGP']} />
+                            <Droplist value={currency} onChange={setCurrency} options={['USD', 'EGP']} />
                             <Droplist value={donationType} onChange={setDonationType} options={['one-time', 'monthly']} />
                         </CardContent>
                     </Card>
                 </div>
-                
+
                 <div className="max-w-4xl w-full !p-6 space-y-6">
                     <Card className="w-full">
                         <CardContent className="!p-8 !space-y-4">
                             <TextHome text="Payment Method" size="text-xl" />
                             <div className="flex !space-x-4 flex-wrap " >
                                 <Button onClick={() => setPaymentMethod("credit-card")} className={`flex !mb-2 items-center !space-x-2 !p-4 ${paymentMethod === "credit-card" ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
-                                    <CreditCard size={32}/> <span>Credit Card</span>
+                                    <CreditCard size={32} /> <span>Credit Card</span>
                                 </Button>
                                 <Button onClick={() => setPaymentMethod("paypal")} className={`flex !mb-2 items-center !space-x-2 !p-4 ${paymentMethod === "paypal" ? "bg-yellow-500 text-white" : "bg-gray-200"}`}>
                                     <Receipt /> <span>PayPal</span>

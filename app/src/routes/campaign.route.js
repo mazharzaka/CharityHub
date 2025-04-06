@@ -7,7 +7,7 @@ const role=require('../middlewares/role.middle');
 const setImageType = require('../middlewares/TypeImage.middle');
 router.post('/create',auth.verifyToken,role.checkRole(['admin'],true),setImageType("campaign"),upload.single('image') ,campaignController.createCampaign);
 router.get('/all', auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true),campaignController.getAllCampaigns);
-router.get('/featured', auth.verifyToken,role.checkRole(['admin'],true),campaignController.getFeaturedCampaigns);
+router.get('/featured', auth.verifyToken,role.checkRole(["donor",'admin'],true),campaignController.getFeaturedCampaigns);
 router.get('/:id',auth.verifyToken,role.checkRole(["donor", "beneficiary", "volunteer", "admin"],true),campaignController.getCampaignById);
 router.put('/:id',auth.verifyToken,role.checkRole(['admin'],true),setImageType("campaign"),upload.single('image'), campaignController.updateCampaign);
 router.delete('/:id',auth.verifyToken,role.checkRole(['admin'],true), campaignController.deleteCampaign);

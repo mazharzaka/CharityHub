@@ -22,7 +22,8 @@ class DonationRepository {
     async getDonationsBycampaignIdAndId(campaignId, id) {
         return await donations.find({ campaignId: campaignId, _id: id });
     }
-    async addTransaction(donationId,transactionId){
-        return await donations.findByIdAndUpdate(donationId,{$push:{transactions:transactionId}},{new:true});}
+   async getDonationsByUserId(userId) {
+        return await donations.find({ donorId: userId }).populate('donorId');
+    }
 }
 module.exports = new DonationRepository();

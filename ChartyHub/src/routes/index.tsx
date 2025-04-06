@@ -12,11 +12,13 @@ import ProtectedRoute from "./protect"
 import Request from "@/pages/Request"
 import MyRequests from "@/components/cards/MyRequestCard"
 import MyTransaction from "@/pages/MyTransaction"
+import SignUp from "@/pages/SignUp"
 
 function AppRoute() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route element={<ProtectedRoute requiredRole={["donor", "beneficiary", "volunteer", "admin"]}>
         <Outlet />
       </ProtectedRoute>}>

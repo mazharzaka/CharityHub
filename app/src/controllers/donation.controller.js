@@ -42,6 +42,18 @@ exports.getDonationById = async (req, res) => {
         res.status(400).send(error.message);
     }
 }
+exports.getDonationsByUserId = async (req, res) => {
+    try {
+        console.log(req.user);
+        
+        const donations = await DonationService.getDonationsByUserId(req.user.user_id);
+        res.status(200).send(donations);
+    } catch (error) {
+        console.log(error);
+        
+        res.status(400).send(error.message);
+    }
+}
 exports.updateStatus = async (req, res) => {
     try {
         const campaignId = req.params.campaignId;

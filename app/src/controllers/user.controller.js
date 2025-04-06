@@ -5,7 +5,8 @@ exports.createUser = async (req, res) => {
     try {
         const hashedPassword = await hash.hashPassword(req.body.password);
         req.body.password = hashedPassword;
-    
+          console.log(req.file);
+          
         req.body.profilePicture = req.file.path;
     
         if (typeof req.body.address === "string") {
@@ -38,6 +39,17 @@ exports.getAllUsers = async (req, res) => {
        return res.status(400).json({ message: error.message });
     }
 };
+exports.getUserById = async (req, res) => {
+    try {
+        const user = await UserService.getUserById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found!" });
+        }
+       return res.status(200).json(user);
+    } catch (error) {
+       return res.status(400).json({ message: error.message });
+    }
+}
 exports.blockUser = async (req, res) => {
     try {
         const user = await UserService.blockUser(req.params.id, req.body.status);

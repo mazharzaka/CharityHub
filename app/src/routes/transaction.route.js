@@ -5,7 +5,7 @@ const auth=require('../middlewares/auth.middle');
 const role=require('../middlewares/role.middle')
 
 router.post('/create',auth.verifyToken,role.checkRole(['admin','donor']),transactionController.createTransaction);
-router.get('/all',auth.verifyToken,role.checkRole(['admin'],true),transactionController.getAllTransactions);
+router.get('/all',auth.verifyToken,role.checkRole(['admin','donor'],true),transactionController.getAllTransactions);
 router.get('/',auth.verifyToken,role.checkRole(['admin','donor']),transactionController.getTransactionById);
 router.put('/:id/:userid/status',auth.verifyToken,role.checkRole(['admin'],true),transactionController.updateStatus);
 router.delete('/:id',auth.verifyToken,role.checkRole(['admin']),transactionController.deleteTransaction);

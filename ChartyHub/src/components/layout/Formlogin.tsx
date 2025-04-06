@@ -14,22 +14,23 @@ import { useNavigate } from "react-router";
 
 function Formlogin() {
     const { control, handleSubmit, formState: { errors } } = useCustomForm<LoginFormValues>(loginSchema);
-    const Login=useLogin()
-    const {loginStore}=Store()
-    const navigate=useNavigate()
+    const Login = useLogin()
+    const { loginStore } = Store()
+    const navigate = useNavigate()
     const onSubmit = (data: LoginFormValues) => {
-        Login.mutate(data,{
-            onSuccess:(res)=>{
-                console.log(data);
-                
-                localStorage.setItem("token",res.token)
+        console.log(data);
+        Login.mutate(data, {
+            onSuccess: (res) => {
+                // console.log(data);
+
+                localStorage.setItem("token", res.token)
                 loginStore(res.token)
                 console.log("login successfuly");
                 navigate("/")
             },
-            onError:(err)=>{
+            onError: (err) => {
                 console.log(err);
-                
+
             }
         })
     };
@@ -51,11 +52,10 @@ function Formlogin() {
                     </div>
                     <div className="text-center !mb-4"> <Button className="text-xl cursor-pointer !px-5 !py-6 bg-[#09cc7f] hover:bg-[#24ac75]" type="submit">Login</Button></div>
                     <div className="text-center">
-                        <Link content="SignUp" className={false} />
+                        <Link content="SignUp" path="/signup" className={false} />
                     </div>
                     <div className="flex justify-center !mt-4 items-center">
-          <Icons component={[<Facebook className="transition-all duration-300 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />, <Github className="transform !mx-4 hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />, <MailPlus className="transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />]} />
-
+                        <Icons component={[<Facebook className="transition-all duration-300 transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />, <Github className="transform !mx-4 hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />, <MailPlus className="transform hover:text-[#09cc7f] hover:scale-x-[-1]" size={32} />]} />
                     </div>
                 </form>
             </div>

@@ -10,6 +10,8 @@ function MyProfile() {
           <div className="max-w-4xl w-full !p-6 space-y-6">
             <Card className=" !my-5 w-full">
               <CardContent className="!p-6 !space-y-4 flex justify-center items-center flex-col">
+              <img src="https://res.cloudinary.com/dsls01rrg/image/upload/v1741202130/uploads/d5cgrz7ziwlb34kknqgk.jpg" alt=" Profile" className="w-28 h-28 rounded-full border-2 border-gray-300" />
+
                 <TextHome text="Mazhar Mohamed Mazhar" size="text-2xl" />
                 <Headline text="Donor" size="text-xl" />
               </CardContent>

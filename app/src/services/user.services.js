@@ -2,12 +2,18 @@ const UserRepository=require('../repositories/user.repository');
 const generateToken = require('../utils/generateToken');
 class UserService{
     async createUser (user){
+        
         const userEmail = await UserRepository.getUserByEmail(user.email);
-        if(userEmail) throw new Error('User already exists');
+        console.log("user"+userEmail);
+
+        if(userEmail!==null) throw new Error('User already exists');
         return await UserRepository.createUser(user);
     }
     async getAllUsers(){
         return await UserRepository.getAllUsers();
+    }
+    async getUserById(id){
+        return await UserRepository.getUserById(id);
     }
     async blockUser(id,status){
         return await UserRepository.blockUser(id,status);
